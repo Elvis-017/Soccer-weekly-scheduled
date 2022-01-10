@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+
+:root{
+--baseColor: #2C0B3A;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body{
+    background-color: #f7f7f7;
+}
+
+a {
+    text-decoration: none;
+}
+
+.week-range {
+    text-align: center;
+    margin: 10px 10px 0px 10px;
+    overflow-y: auto;
+}
+
+.day-name{
+    font-weight: bold;
+}
+
+.week-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 10px 10px 10px;
+}
+
+.week-container .week-day {
+    width: 40px;
+    cursor: pointer;
+    color: black;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.week-container .week-day:hover {
+    border-color: var(--baseColor);
+    border-style: solid;
+}
+
+.unselected{
+    border: 5px solid lightgray;
+}
+
+
+.selected {
+    border-color: var(--baseColor);
+    border-style: solid;
+}
+
+.container{
+    width: calc(50% - 20px);
+    height: auto;
+    padding: 2px;
+    background-color: #fff;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+    flex-direction: row;
+    overflow-y: auto;
+}
+
+.match{
+    width: calc(90% - 40px);
+    border-radius: 5px;
+    display: block;
+    margin: 56.43px auto 56.43px auto;
+    box-shadow: 0px 0px 3px 1px lightgrey;
+  
+}
+
+.match-header{
+    background-color: var(--baseColor);
+    box-shadow: 0px 0px 0px 13px var(--baseColor);
+    color: white;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+.match-body{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.match-body .team-name{
+width: 100%;
+}
+
+.versus, .team{
+    padding: 20px;
+    width: 33.33%;
+}
+
+.team{
+    text-align: center;
+}
+
+
+.versus{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.versus span{
+
+    font-size: 45px ;
+    font-family: 'Knewave', cursive;
+}
+
+
+.no-match{
+    display: none;
+}
