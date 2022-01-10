@@ -45,7 +45,7 @@ let matches = [{
 
 ]
 
-//aarays of weekdays an  months of the actual year
+//array of weekdays an  months of the actual year
 let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ],
