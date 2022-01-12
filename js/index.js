@@ -26,25 +26,6 @@ let teams = [{
     }
 ]
 
-let matches = [{
-        teamOne: teams[0],
-        teamTwo: teams[1],
-        date: new Date(2022, 0, 11, 16, 0)
-    },
-    {
-        teamOne: teams[3],
-        teamTwo: teams[2],
-        date: new Date(2022, 0, 11, 10, 0)
-    },
-
-    {
-        teamOne: teams[4],
-        teamTwo: teams[5],
-        date: new Date(2022, 0, 10, 9, 30)
-    },
-
-]
-
 //array of weekdays an  months of the actual year
 let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -58,7 +39,9 @@ let matchday = document.getElementsByClassName("match");
 const WEEK_CONTAINER = document.getElementById("week-container"),
     WEEK_RANGE = document.getElementById("week-range"),
     WEEK_MATCHES = document.getElementById("week-matches"),
-    curDate = new Date()
+    curDate = new Date();
+
+let baseDay;
 
 let calculateWeekDays = (function () {
 
@@ -69,7 +52,7 @@ let calculateWeekDays = (function () {
         
     if (curDate.getDay() >= 0 && curDate.getDay() <= 2) week += 1
         
-    let baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
+    baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
 
     let addDays = 6
 
@@ -100,6 +83,25 @@ let calculateWeekDays = (function () {
     }
 })()
 
+let rangeRandValue = ((7-1) + 1))
+let matches = [{
+        teamOne: teams[0],
+        teamTwo: teams[1],
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 16, 0)
+    },
+    {
+        teamOne: teams[3],
+        teamTwo: teams[2],
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 10, 0)
+    },
+
+    {
+        teamOne: teams[4],
+        teamTwo: teams[5],
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 9, 30)
+    },
+]
+
 //showing every match day
 for (const key in matches) {
     const element = matches[key];
@@ -112,15 +114,14 @@ for (const key in matches) {
             <div class="team-logo" ><img class="team-logo" src="${element.teamOne.logo}" alt="😥" class="logo"></div>
             <div class="team-name">${element.teamOne.teamName}</div>
         </div>
-    
+   
         <div class="versus"><span>VS</span></div>
-    
+ 
         <div class="team second-team">
             <div  class="team-logo" ><img src="${element.teamTwo.logo}" alt="😥" class="logo"></div>
             <div class="team-name">${element.teamTwo.teamName}</div>
         </div>
     </div>
-    
     </div>`)
 }
 
@@ -151,8 +152,7 @@ function selectWeekDay(node) {
         if (
             node.children[0].textContent.trim() == element.dataset.day.toString() &&
             node.children[1].textContent.trim() == element.dataset.dayname.toString()
-        )  element.style.display = "block"
-       
+        )  element.style.display = "block"   
     }
 }
 
