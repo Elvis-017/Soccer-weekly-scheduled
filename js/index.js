@@ -86,7 +86,7 @@ let calculateWeekDays = (function () {
         let dayNumber = days[baseDay.getDay() + i]
         WEEK_CONTAINER.insertAdjacentHTML(
             "beforeend",
-            `<div  onclick="selectWeekDay(this)" class="week-day unselected ${days[curDate.getDay()] == dayNumber  ?  "selected" : 'sads' }">
+            `<div  onclick="selectWeekDay(this)" class="week-day unselected ${days[curDate.getDay()] == dayNumber  ?  "selected" : '' }">
             <div class="day-name">
             ${dayName}
             </div>
