@@ -145,9 +145,6 @@ function selectWeekDay(node) {
     for (let index = 0; index < matchday.length; index++) {
         const element = matchday[index];
 
-        console.log(element.dataset.dayname)
-        console.log(node.children[1].textContent.trim())
-
         if (
             node.children[0].textContent.trim() == element.dataset.day.toString() &&
             node.children[1].textContent.trim() == element.dataset.dayname.toString()
