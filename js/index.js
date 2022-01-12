@@ -83,22 +83,21 @@ let calculateWeekDays = (function () {
     }
 })()
 
-let rangeRandValue = ((7-1) + 1))
 let matches = [{
         teamOne: teams[0],
         teamTwo: teams[1],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 16, 0)
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 16, 0)
     },
     {
         teamOne: teams[3],
         teamTwo: teams[2],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 10, 0)
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 10, 0)
     },
 
     {
         teamOne: teams[4],
         teamTwo: teams[5],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * rangeRandValue, 9, 30)
+        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 9, 30)
     },
 ]
 
