@@ -65,12 +65,11 @@ let calculateWeekDays = (function () {
     //calculate actual wekk and its week days
     let baseDate = new Date(curDate.getFullYear(), 0, 1),
         dateDiff = Math.floor((curDate - baseDate) / 86400000),
-        week = Math.ceil(((dateDiff + curDate.getDay() + 1) / 7)),
+        week = Math.ceil(((dateDiff + curDate.getDay() + 1) / 7));
         
-        if (baseDay.getDate() >= 0 && baseDay.getDate() <= 2)
-                week = week + 1
+    if (curDate.getDay() >= 0 && curDate.getDay() <= 2) week += 1
         
-        baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
+    let baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
 
     let addDays = 6
 
