@@ -65,7 +65,8 @@ let calculateWeekDays = (function () {
     //calculate actual wekk and its week days
     let baseDate = new Date(curDate.getFullYear(), 0, 1),
         dateDiff = Math.floor((curDate - baseDate) / 86400000),
-        week = Math.ceil(((dateDiff + curDate.getDay() + 1) / 7) + 1),
+        week = Math.ceil(((dateDiff + curDate.getDay() + 1) / 7)),
+        
         baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
 
     let addDays = 6
@@ -75,8 +76,8 @@ let calculateWeekDays = (function () {
         //printing actual weekdays range
     WEEK_RANGE.insertAdjacentHTML(
         "beforeend",
-        `${(baseDay.getDate())} de ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()} - 
-         ${(baseDay.getDate()) + addDays} de  ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()}`
+        `${(baseDay.getDate())} of ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()} - 
+         ${(baseDay.getDate()) + addDays} of  ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()}`
     )
 
     //printing  weekdays
