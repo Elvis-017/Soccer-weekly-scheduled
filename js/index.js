@@ -27,10 +27,10 @@ let teams = [{
 ]
 
 //array of weekdays an  months of the actual year
-let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+let months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
     ],
-    days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+    days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"],
 
     weekDays = document.getElementsByClassName("week-day");
 
