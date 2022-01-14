@@ -39,7 +39,7 @@ let matchday = document.getElementsByClassName("match");
 const WEEK_CONTAINER = document.getElementById("week-container"),
     WEEK_RANGE = document.getElementById("week-range"),
     WEEK_MATCHES = document.getElementById("week-matches"),
-    curDate = new Date(2022, 8, 27);
+    curDate = new Date(2022, 6, 31);
 
 let baseDay;
 
@@ -59,29 +59,60 @@ let calculateWeekDays = (function () {
     console.log(week)
 
     //printing actual weekdays range
-    WEEK_RANGE.insertAdjacentHTML(
-        "beforeend",
-        `${(baseDay.getDate())} of ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()} -
-         ${(baseDay.getDate()) + addDays} of  ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()}`
-    )
 
     //printing  weekdays
     let i = 0
     for (i; i < 7; i++) {
-        let dayNumber = baseDay.getDate() + i;
-        let dayName = days[baseDay.getDay() + i]
+        let dayNumber = baseDay.getDate() + i,
+            dayName = days[baseDay.getDay() + i],
+            secondPartMonth = baseDay.getMonth(),
+            isLastDay = false
 
-        if (baseDay.getDate() + i >= 29 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() === 1) dayNumber = baseDay.getDate() + i - 28;
 
-        if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 30;
+        function checker() {
+            if (baseDay.getDate() + i >= 29 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() === 1) {
+                dayNumber = baseDay.getDate() + i - 28;
+                isLastDay = true
+            }
 
-        if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 30;
+            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() > 7) {
+                dayNumber = baseDay.getDate() + i - 30;
+                isLastDay = true
+            }
 
-        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 31;
+            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() < 7) {
+                dayNumber = baseDay.getDate() + i - 30;
+                isLastDay = true
+            }
 
-        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 31;
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() < 7) {
+                dayNumber = baseDay.getDate() + i - 31;
+                isLastDay = true
+            }
 
-        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() === 7) dayNumber = baseDay.getDate() + i - 31;
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() > 7) {
+                dayNumber = baseDay.getDate() + i - 31;
+                isLastDay = true
+            }
+
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() === 7) {
+                dayNumber = baseDay.getDate() + i - 31
+                isLastDay = true
+            };
+
+            return isLastDay
+        }
+
+        checker()
+
+        console.log(checker())
+
+        if (checker()) secondPartMonth += 1
+
+        WEEK_RANGE.innerHTML =
+            `${(baseDay.getDate())} of ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()} -
+             ${dayNumber} of  ${months[secondPartMonth]}, ${baseDay.getFullYear()}`
+
 
         WEEK_CONTAINER.insertAdjacentHTML(
             "beforeend",
