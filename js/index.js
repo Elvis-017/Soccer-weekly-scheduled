@@ -1,35 +1,35 @@
 //data to displays as a match day
 
 let teams = [{
-        logo: "images/Arsenal.png",
-        teamName: "Arsenal",
-    },
-    {
-        logo: "images/United.png",
-        teamName: "Manchester United",
-    },
-    {
-        logo: "images/city.png",
-        teamName: "Manchester City",
-    },
-    {
-        logo: "images/Liverpool.png",
-        teamName: "Liverpool",
-    },
-    {
-        logo: "images/westham.png",
-        teamName: "West Ham",
-    },
-    {
-        logo: "images/Chelsea.png",
-        teamName: "Chelsea",
-    }
+    logo: "images/Arsenal.png",
+    teamName: "Arsenal",
+},
+{
+    logo: "images/United.png",
+    teamName: "Manchester United",
+},
+{
+    logo: "images/city.png",
+    teamName: "Manchester City",
+},
+{
+    logo: "images/Liverpool.png",
+    teamName: "Liverpool",
+},
+{
+    logo: "images/westham.png",
+    teamName: "West Ham",
+},
+{
+    logo: "images/Chelsea.png",
+    teamName: "Chelsea",
+}
 ]
 
 //array of weekdays an  months of the actual year
 let months = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ],
+    "July", "August", "September", "October", "November", "December"
+],
     days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"],
 
     weekDays = document.getElementsByClassName("week-day");
@@ -39,7 +39,7 @@ let matchday = document.getElementsByClassName("match");
 const WEEK_CONTAINER = document.getElementById("week-container"),
     WEEK_RANGE = document.getElementById("week-range"),
     WEEK_MATCHES = document.getElementById("week-matches"),
-    curDate = new Date();
+    curDate = new Date(2022, 8, 27);
 
 let baseDay;
 
@@ -49,56 +49,69 @@ let calculateWeekDays = (function () {
     let baseDate = new Date(curDate.getFullYear(), 0, 1),
         dateDiff = Math.floor((curDate - baseDate) / 86400000),
         week = Math.ceil(((dateDiff + curDate.getDay() + 1) / 7));
-        
-    if (curDate.getDay() >= 0 && curDate.getDay() <= 2) week += 1
-        
-    baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
 
+    if (curDate.getDay() >= 0 && curDate.getDay() <= 2) week += 1
+
+    baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
+    console.log(baseDay.getMonth() % 2)
     let addDays = 6
 
     console.log(week)
 
-        //printing actual weekdays range
+    //printing actual weekdays range
     WEEK_RANGE.insertAdjacentHTML(
         "beforeend",
-        `${(baseDay.getDate())} of ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()} - 
-         ${(baseDay.getDate()) + addDays} of  ${ months[baseDay.getMonth()]}, ${ baseDay.getFullYear()}`
+        `${(baseDay.getDate())} of ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()} -
+         ${(baseDay.getDate()) + addDays} of  ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()}`
     )
 
     //printing  weekdays
     let i = 0
     for (i; i < 7; i++) {
-        let dayName = baseDay.getDate() + i;
-        let dayNumber = days[baseDay.getDay() + i]
+        let dayNumber = baseDay.getDate() + i;
+        let dayName = days[baseDay.getDay() + i]
+
+        if (baseDay.getDate() + i >= 29 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() === 1) dayNumber = baseDay.getDate() + i - 28;
+
+        if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 30;
+
+        if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 30;
+
+        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 31;
+
+        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 31;
+
+        if (baseDay.getDate() + i >= 32 && baseDay.getMonth() === 7) dayNumber = baseDay.getDate() + i - 31;
+
         WEEK_CONTAINER.insertAdjacentHTML(
             "beforeend",
-            `<div  onclick="selectWeekDay(this)" class="week-day unselected ${days[curDate.getDay()] == dayNumber  ?  "selected" : '' }">
+            `<div  onclick="selectWeekDay(this)" class="week-day unselected ${days[curDate.getDay()] == dayNumber ? "selected" : ''}">
             <div class="day-name">
-            ${dayName}
+            ${dayNumber}
             </div>
             <div class="day-number">
-            ${dayNumber}
+            ${dayName}
         </div>`
         )
     }
 })()
 
 let matches = [{
-        teamOne: teams[0],
-        teamTwo: teams[1],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 16, 0)
-    },
-    {
-        teamOne: teams[3],
-        teamTwo: teams[2],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 10, 0)
-    },
+    teamOne: teams[0],
+    teamTwo: teams[1],
+    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 16, 0)
+},
+{
+    teamOne: teams[3],
+    teamTwo: teams[2],
+    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 10, 0)
+},
 
-    {
-        teamOne: teams[4],
-        teamTwo: teams[5],
-        date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7-1) + 1)), 9, 30)
-    },
+{
+    teamOne: teams[4],
+    teamTwo: teams[5],
+    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 9, 30)
+},
 ]
 
 //showing every match day
@@ -113,9 +126,9 @@ for (const key in matches) {
             <div class="team-logo" ><img class="team-logo" src="${element.teamOne.logo}" alt="😥" class="logo"></div>
             <div class="team-name">${element.teamOne.teamName}</div>
         </div>
-   
+
         <div class="versus"><span>VS</span></div>
- 
+
         <div class="team second-team">
             <div  class="team-logo" ><img src="${element.teamTwo.logo}" alt="😥" class="logo"></div>
             <div class="team-name">${element.teamTwo.teamName}</div>
@@ -151,7 +164,7 @@ function selectWeekDay(node) {
         if (
             node.children[0].textContent.trim() == element.dataset.day.toString() &&
             node.children[1].textContent.trim() == element.dataset.dayname.toString()
-        )  element.style.display = "block"   
+        ) element.style.display = "block"
     }
 }
 
