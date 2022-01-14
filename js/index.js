@@ -39,7 +39,7 @@ let matchday = document.getElementsByClassName("match");
 const WEEK_CONTAINER = document.getElementById("week-container"),
     WEEK_RANGE = document.getElementById("week-range"),
     WEEK_MATCHES = document.getElementById("week-matches"),
-    curDate = new Date(2022, 6, 31);
+    curDate = new Date(2022, 0, 30);
 
 let baseDay;
 
@@ -53,14 +53,10 @@ let calculateWeekDays = (function () {
     if (curDate.getDay() >= 0 && curDate.getDay() <= 2) week += 1
 
     baseDay = new Date(baseDate.getFullYear(), baseDate.getMonth(), (((week - 1) * 7) - 5));
-    console.log(baseDay.getMonth() % 2)
     let addDays = 6
 
     console.log(week)
 
-    //printing actual weekdays range
-
-    //printing  weekdays
     let i = 0
     for (i; i < 7; i++) {
         let dayNumber = baseDay.getDate() + i,
@@ -68,59 +64,39 @@ let calculateWeekDays = (function () {
             secondPartMonth = baseDay.getMonth(),
             isLastDay = false
 
-
+        //Validations for the last day of a month based on odds  and pairs index of the months
         function checker() {
-            if (baseDay.getDate() + i >= 29 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() === 1) {
-                dayNumber = baseDay.getDate() + i - 28;
-                isLastDay = true
-            }
+            if (baseDay.getDate() + i >= 29 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() === 1) dayNumber = baseDay.getDate() + i - 28, isLastDay = true
 
-            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() > 7) {
-                dayNumber = baseDay.getDate() + i - 30;
-                isLastDay = true
-            }
+            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 30, isLastDay = true
 
-            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() < 7) {
-                dayNumber = baseDay.getDate() + i - 30;
-                isLastDay = true
-            }
+            if (baseDay.getDate() + i >= 31 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 30, isLastDay = true
 
-            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() < 7) {
-                dayNumber = baseDay.getDate() + i - 31;
-                isLastDay = true
-            }
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 == 0 && baseDay.getMonth() < 7) dayNumber = baseDay.getDate() + i - 31, isLastDay = true
 
-            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() > 7) {
-                dayNumber = baseDay.getDate() + i - 31;
-                isLastDay = true
-            }
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() % 2 != 0 && baseDay.getMonth() > 7) dayNumber = baseDay.getDate() + i - 31, isLastDay = true
 
-            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() === 7) {
-                dayNumber = baseDay.getDate() + i - 31
-                isLastDay = true
-            };
+            if (baseDay.getDate() + i >= 32 && baseDay.getMonth() === 7) dayNumber = baseDay.getDate() + i - 31, isLastDay = true
 
             return isLastDay
         }
 
         checker()
 
-        console.log(checker())
-
         if (checker()) secondPartMonth += 1
-
+        //printing actual weekdays range
         WEEK_RANGE.innerHTML =
             `${(baseDay.getDate())} of ${months[baseDay.getMonth()]}, ${baseDay.getFullYear()} -
              ${dayNumber} of  ${months[secondPartMonth]}, ${baseDay.getFullYear()}`
 
-
+        //printing  weekdays
         WEEK_CONTAINER.insertAdjacentHTML(
             "beforeend",
             `<div  onclick="selectWeekDay(this)" class="week-day unselected ${days[curDate.getDay()] == dayNumber ? "selected" : ''}">
-            <div class="day-name">
+            <div class="day-number">
             ${dayNumber}
             </div>
-            <div class="day-number">
+            <div class="day-name">
             ${dayName}
         </div>`
         )
@@ -130,18 +106,18 @@ let calculateWeekDays = (function () {
 let matches = [{
     teamOne: teams[0],
     teamTwo: teams[1],
-    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 16, 0)
+    date: new Date(baseDay.getFullYear(), baseDay.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 16, 0)
 },
 {
     teamOne: teams[3],
     teamTwo: teams[2],
-    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 10, 0)
+    date: new Date(baseDay.getFullYear(), baseDay.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 10, 0)
 },
 
 {
     teamOne: teams[4],
     teamTwo: teams[5],
-    date: new Date(curDate.getFullYear(), curDate.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 9, 30)
+    date: new Date(baseDay.getFullYear(), baseDay.getMonth(), baseDay.getDate() + Math.floor(Math.random() * ((7 - 1) + 1)), 9, 30)
 },
 ]
 
